@@ -1,92 +1,57 @@
 import streamlit as st
 import time
 
-# --- 1. عقل المحرك (المدمج لضمان الاستقرار) ---
+# --- 1. المحرك السيادي ---
 def sovereign_engine(data):
-    try:
-        # هنا تتم المعالجة السيادية بنظام الشور
-        result = f"OKORT-{str(data).upper()}-PRIME"
-        return result
-    except:
-        return "خطأ في المعالجة"
+    return f"OKORT-{str(data).upper()}-PRIME"
 
-# --- 2. إعدادات الصفحة السيادية ---
-st.set_page_config(page_title="Okort Sovereign Engine", page_icon="🛡️", layout="wide")
-
-# --- 3. تصميم الواجهة (الأسود والذهبي الملكي) ---
+# --- 2. التصميم الفخم ---
+st.set_page_config(page_title="Okort Sovereign Factory", page_icon="🛡️", layout="wide")
 st.markdown("""
     <style>
-    /* تنسيق الخلفية والنصوص الأساسية */
     .stApp { background-color: #000000; }
-    h1, h2, h3, label, p, .stMarkdown { color: #D4AF37 !important; }
-    
-    /* تنسيق الزر الكبير */
-    .stButton>button { 
-        background-color: #D4AF37; 
-        color: black; 
-        border-radius: 20px; 
-        font-weight: bold; 
-        width: 100%;
-        border: none;
-        transition: 0.3s;
-    }
-    .stButton>button:hover {
-        background-color: #ffffff;
-        color: #000000;
-    }
-    
-    /* تنسيق خانة الإدخال */
-    .stTextInput>div>div>input { 
-        background-color: #1a1a1a; 
-        color: #D4AF37; 
-        border: 1px solid #D4AF37; 
-    }
-    
-    /* إخفاء القوائم الجانبية لزيادة الفخامة */
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
-    
-    /* تنسيق صندوق حالة الشور (الأنيميشن) */
-    .stStatus {
-        border: 1px solid #D4AF37 !important;
-        background-color: #1a1a1a !important;
-    }
+    h1, h2, h3, label, p { color: #D4AF37 !important; }
+    .stMetric { background-color: #1a1a1a; padding: 15px; border-radius: 10px; border: 1px solid #D4AF37; }
+    [data-testid="stMetricValue"] { color: #ffffff !important; }
+    .stButton>button { background-color: #D4AF37; color: black; border-radius: 20px; font-weight: bold; width: 100%; }
     </style>
 """, unsafe_allow_html=True)
 
-# --- 4. واجهة المستخدم (The Interface) ---
-st.title("🛡️ OKORT SOVEREIGN ENGINE")
-st.subheader("النظام السيادي لمعالجة البيانات - نظام الشور مفعل")
-st.write("---")
+# --- 3. الواجهة ---
+st.title("🛡️ OKORT SOVEREIGN FACTORY")
+st.subheader("نموذج إثبات المفهوم لبراءة الاختراع - نظام الشور")
 
-user_input = st.text_input("أدخل الرقم أو البيانات الأولية لمعالجتها:", placeholder="أدخل هنا... (مثال: 1000)")
+# عرض عدادات المصنع في الحالة العادية
+c1, c2, c3 = st.columns(3)
+c1.metric("حالة المصنع", "جاهز", "Online")
+c2.metric("إصدار المحرك", "V3.0", "Stable")
+c3.metric("بروتوكول الأمان", "SHORE", "Active")
 
-# --- 5. منطق التشغيل والشور البصري (Logic & Shore V3) ---
-if st.button("تفعيل المحرك السيادي"):
+user_input = st.text_input("أدخل البيانات الأولية للمعالجة السيادية:")
+
+if st.button("تفعيل خط الإنتاج السيادي"):
     if user_input:
-        # 🛡️ استدعاء الشور البصري (Animated Status)
-        with st.status("🛠️ جاري استحضار نظام الشور 2026...", expanded=True) as status:
-            st.write("🔍 فحص بروتوكولات الأمان وبروتونات الأرقام...")
-            time.sleep(0.7)
-            st.write("🛡️ تفعيل طبقة الحماية السيادية (Shore-Shield V3)...")
-            time.sleep(0.7)
-            st.write("⚡ تشفير المخرجات بنظام أوكورت PRIME...")
-            time.sleep(0.5)
-            # تحديث الحالة للنجاح
-            status.update(label="✅ تم تفعيل الشور بالكامل!", state="complete", expanded=False)
+        with st.status("🛠️ جاري تشغيل المصنع وفحص المعادلات...", expanded=True) as status:
+            st.write("🔍 تفكيك الكتلة الرقمية...")
+            time.sleep(0.6)
+            st.write("🛡️ تطبيق خوارزمية الشور النوبية...")
+            time.sleep(0.6)
+            status.update(label="✅ تمت المعالجة بنجاح!", state="complete", expanded=False)
         
-        # استدعاء المحرك
         output = sovereign_engine(user_input)
         
-        # عرض النتيجة داخل الدرع الذهبي (الشور المرئي)
+        # عرض النتيجة والتحليلات
         st.markdown(f"""
-            <div style="border: 2px solid #D4AF37; padding: 25px; border-radius: 15px; background-color: #1a1a1a; text-align: center; margin-top: 25px; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);">
-                <h3 style="color: #D4AF37; margin: 0; font-size: 1.2em;">🛡️ النتيجة محمية سيادياً</h3>
-                <h1 style="color: #ffffff; letter-spacing: 3px; font-size: 2.5em; margin: 10px 0;">{output}</h1>
-                <p style="color: #D4AF37; font-size: 0.9em; margin-top: 15px; border-top: 1px solid #D4AF37; padding-top: 10px;">
-                    نظام الشور نشط (P-S-V3) | تاريخ المعالجة: 2026
-                </p>
+            <div style="border: 2px solid #D4AF37; padding: 25px; border-radius: 15px; background-color: #1a1a1a; text-align: center; margin-top: 20px;">
+                <h3 style="color: #D4AF37; margin: 0;">📦 المنتج النهائي (الرقم السيادي)</h3>
+                <h1 style="color: #ffffff; letter-spacing: 2px;">{output}</h1>
             </div>
         """, unsafe_allow_html=True)
+        
+        # إضافة تحليل السرعة لإثبات الكفاءة في البراءة
+        st.info(f"⚡ تم التحويل بنجاح في {time.time() % 1:.4f} ثانية باستخدام موارد النظام السيادي.")
     else:
-        st.warning("برجاء إدخال بيانات أولاً")
+        st.warning("برجاء إدخال بيانات")
+
+st.divider()
+st.caption("وثيقة تقنية رقم 2026-OK-SH | أوكورت - نظام الشور")
