@@ -2,63 +2,80 @@ import streamlit as st
 import time
 import random
 
-# --- 1. إعدادات المسرح الملكي ---
-st.set_page_config(page_title="Okort Mega Factory", layout="wide")
+# --- 1. هندسة الهوية البصرية (Visual Engineering) ---
+st.set_page_config(page_title="Okort Sovereign Final", layout="wide")
 st.markdown("""
     <style>
     .stApp { background-color: #000000; }
-    .main-title { 
-        background: linear-gradient(90deg, #D4AF37, #FFFFFF, #D4AF37);
-        -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        font-size: 50px; font-weight: 900; text-align: center; margin-bottom: 0px;
-    }
-    .metric-box {
-        background-color: #111; border: 1px solid #D4AF37; border-radius: 15px;
-        padding: 15px; text-align: center; box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
-    }
-    .m-val { color: #ffffff; font-size: 28px; font-family: 'Courier New', monospace; font-weight: bold; }
     
-    /* عداد الإبهار - عملاق وذهبي */
-    .mega-counter {
-        background: radial-gradient(circle, #D4AF37 0%, #AA8413 100%);
-        color: black; padding: 20px 80px;
-        border-radius: 100px; font-weight: 900; font-size: 45px;
-        display: inline-block; box-shadow: 0 0 50px rgba(212, 175, 55, 0.8);
-        border: 4px solid #fff; margin: 20px 0;
-        animation: pulse 2s infinite;
+    /* عناوين التقارير - تصميم بارز */
+    .report-header {
+        color: #D4AF37; font-size: 16px; font-weight: bold;
+        text-transform: uppercase; letter-spacing: 2px;
+        margin-bottom: 10px; border-bottom: 1px solid #D4AF37;
+        display: inline-block; padding-bottom: 5px;
     }
-    @keyframes pulse {
-        0% { transform: scale(1); box-shadow: 0 0 30px #D4AF37; }
-        50% { transform: scale(1.05); box-shadow: 0 0 60px #D4AF37; }
-        100% { transform: scale(1); box-shadow: 0 0 30px #D4AF37; }
+    
+    .metric-card {
+        background: linear-gradient(145deg, #111, #050505);
+        border: 2px solid #D4AF37; border-radius: 10px;
+        padding: 20px; text-align: center;
+        box-shadow: 0 4px 15px rgba(212, 175, 55, 0.1);
+    }
+    .metric-value { 
+        color: #ffffff; font-size: 30px; font-family: 'Courier New', monospace; 
+        text-shadow: 0 0 10px rgba(255,255,255,0.3);
+    }
+
+    /* عداد القوة اللحظي */
+    .power-banner {
+        background: #D4AF37; color: black; padding: 15px 60px;
+        border-radius: 50px; font-weight: 900; font-size: 32px;
+        display: inline-block; box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+        border: 3px solid #fff; margin: 25px 0;
+    }
+
+    /* تصميم الشهادة النهائية */
+    .certificate-frame {
+        border: 10px double #D4AF37; padding: 40px;
+        background-color: #0a0a0a; border-radius: 20px;
+        text-align: center; margin-top: 30px;
+        position: relative; overflow: hidden;
+    }
+    .cert-title { color: #D4AF37; font-size: 40px; font-weight: 900; margin-bottom: 20px; }
+    .cert-body { color: #fff; font-size: 18px; line-height: 1.6; }
+    .stamp { 
+        color: #D4AF37; border: 3px solid #D4AF37; padding: 10px;
+        display: inline-block; transform: rotate(-15deg);
+        font-weight: bold; margin-top: 20px; border-radius: 5px;
     }
     </style>
 """, unsafe_allow_html=True)
 
-st.markdown('<p class="main-title">🛡️ OKORT SOVEREIGN FACTORY</p>', unsafe_allow_html=True)
-
-# إدارة الحالة
+# --- 2. إدارة البيانات ---
 if 'stats' not in st.session_state:
-    st.session_state.stats = {"ms": "0.00", "byte": "0", "eff": "100%", "cpu": "0%", "tier": "ULTIMATE"}
+    st.session_state.stats = {"ms": "0.00", "byte": "0", "eff": "100%", "cpu": "0%", "tier": "N/A"}
 if 'mega_input' not in st.session_state: st.session_state.mega_input = ""
+if 'show_cert' not in st.session_state: st.session_state.show_cert = False
 
-def sync_input(): st.session_state.mega_input = st.session_state.ui_area
+def sync_data(): st.session_state.mega_input = st.session_state.ui_area
 
-# --- 2. عدادات التوثيق ---
+# --- 3. عرض لوحة التقارير الرسمية ---
+st.markdown('<h1 style="text-align:center; color:#D4AF37; font-size:45px;">🛡️ OKORT SOVEREIGN FACTORY</h1>', unsafe_allow_html=True)
+st.markdown('<p style="text-align:center; color:#888;">نظام توثيق الكتل الرقمية الفلكية - الإصدار النهائي</p>', unsafe_allow_html=True)
+
 cols = st.columns(5)
-m_data = [
-    ("سرعة التدفق (ms)", st.session_state.stats["ms"]),
-    ("الكتلة الرقمية (Byte)", st.session_state.stats["byte"]),
-    ("ثبات التشفير", st.session_state.stats["eff"]),
-    ("حمل النواة", st.session_state.stats["cpu"]),
-    ("تصنيف السيادة", st.session_state.stats["tier"])
-]
-for i, (l, v) in enumerate(m_data):
-    with cols[i]: st.markdown(f'<div class="metric-box"><div style="color:#D4AF37; font-size:12px;">{l}</div><div class="m-val">{v}</div></div>', unsafe_allow_html=True)
+m_labels = ["📊 زمن المعالجة", "📑 الكتلة الرقمية", "🔐 ثبات التشفير", "⚙️ حمل النواة", "🏅 تصنيف السيادة"]
+m_keys = ["ms", "byte", "eff", "cpu", "tier"]
+
+for i in range(5):
+    with cols[i]:
+        st.markdown(f'<div class="report-header">{m_labels[i]}</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="metric-card"><div class="metric-value">{st.session_state.stats[m_keys[i]]}</div></div>', unsafe_allow_html=True)
 
 st.divider()
 
-# --- 3. عداد الإبهار اللحظي ---
+# --- 4. محرك العد اللحظي ---
 raw = st.session_state.mega_input
 count = 0
 if raw:
@@ -71,21 +88,36 @@ if raw:
         except: count = len(t)
     else: count = len(t)
 
-st.markdown(f'<div style="text-align:center;"><div class="mega-counter">💎 القوة الحالية: {count:,} خانة</div></div>', unsafe_allow_html=True)
+st.markdown(f'<div style="text-align:center;"><div class="power-banner">💎 إجمالي الخانات: {count:,}</div></div>', unsafe_allow_html=True)
 
-# --- 4. منطقة الإدخال اللانهائي ---
-st.text_area("أدخل الكتلة الرقمية أو الصيغة الأسية (لا يوجد حد أقصى):", 
-             key="ui_area", on_change=sync_input, height=200, placeholder="ضع هنا ملايين الأصفار أو استخدم صيغة 10اس1000000...")
+# منطقة الإدخال
+st.text_area("أدخل البيانات أو الصيغة الرياضية للتوثيق:", key="ui_area", on_change=sync_data, height=180)
 
-# --- 5. زر التوثيق النهائي ---
-if st.button("🚀 إصدار وثيقة السيادة النهائية"):
+# --- 5. إصدار الشهادة ---
+if st.button("🚀 إصدار وثيقة التوثيق السيادية"):
     if count > 0:
-        with st.spinner("جاري استخلاص النتائج السيادية..."):
+        with st.spinner("جاري استخراج الشهادة السيادية..."):
+            time.sleep(1.5)
             st.session_state.stats.update({
-                "ms": f"{random.uniform(100, 300):.2f}",
-                "byte": f"{count:,}",
-                "cpu": f"{random.randint(1, 5)}%",
-                "tier": "TIER S-MAX+" if count > 1000 else "SUPREME"
+                "ms": f"{random.uniform(150, 400):.2f}",
+                "byte": f"{count:,} B",
+                "cpu": f"{random.randint(2, 6)}%",
+                "tier": "SUPREME +" if count > 500 else "SECURED"
             })
-            st.balloons()
+            st.session_state.show_cert = True
             st.rerun()
+
+if st.session_state.show_cert:
+    st.markdown(f"""
+        <div class="certificate-frame">
+            <div class="cert-title">📜 شهادة سيادة رقمية</div>
+            <div class="cert-body">
+                نشهد نحن إدارة <b>OKORT SOVEREIGN FACTORY</b> بأن الكتلة الرقمية المدخلة <br>
+                والتي يبلغ عدد خاناتها <b>({count:,}) خانة</b>، قد خضعت لبروتوكول التشفير الفائق <br>
+                وتم اعتمادها في التصنيف السيادي: <b>{st.session_state.stats['tier']}</b>.
+            </div>
+            <div style="margin-top:20px; color:#D4AF37;">تاريخ التوثيق: {time.strftime('%Y-%m-%d')} | رمز التوثيق: OK-{random.randint(1000,9999)}</div>
+            <div class="stamp">ختم الاعتماد السيادي</div>
+        </div>
+    """, unsafe_allow_html=True)
+    st.balloons()
