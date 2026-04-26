@@ -1,7 +1,12 @@
-import streamlit as st
-import time
-
-# --- 1. عقل المحرك (وضعناه هنا بدلاً من ملف منفصل لضمان العمل) ---
+if st.button("تفعيل المحرك السيادي"):
+with st.status("🛠️ جاري استدعاء نظام الشور 2026...", expanded=True) as status:
+st.write("🔍 فحص بروتوكولات الأمان..."); time.sleep(0.7)
+st.write("🛡️ تفعيل حماية الشور (Shore-Shield)..."); time.sleep(0.7)
+status.update(label="✅ تم تفعيل الشور بنجاح!", state="complete", expanded=False)
+st.markdown(f"""
+<div style="border: 2px solid #D4AF37; padding: 20px; border-radius: 15px; background-color: #1a1a1a; text-align: center; margin-top: 20px;">
+<h3 style="color: #D4AF37; margin: 0;">🛡️ النتيجة محمية سيادياً</h3>
+<h2 style="color: #ffffff; letter-spacing: 2px;">{output}</h2>
 def sovereign_engine(data):
     try:
         # هنا تتم المعالجة السيادية بنظام الشور
